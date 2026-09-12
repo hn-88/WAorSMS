@@ -41,8 +41,7 @@ the file, they just apply to that one send.
 1. Create a new GitHub repository and push the **contents of this folder**
    to its root (so `settings.gradle`, `app/`, `.github/`, etc. sit at the
    repo's top level — not nested inside another `WAorSMS/` folder).
-2. The workflow at `.github/workflows/build.yml` runs automatically on
-   every push to `main`, and can also be triggered manually from the
+2. The workflow at `.github/workflows/build.yml` can be triggered manually from the
    **Actions** tab via **Run workflow**.
 3. When the run finishes, open it in the **Actions** tab and download the
    `waorsms-debug-apk` artifact — that's your installable APK.
