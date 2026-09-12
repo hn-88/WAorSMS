@@ -29,16 +29,18 @@ import androidx.appcompat.app.AppCompatActivity
  */
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var numberField: EditText
+    private var clipboardChecked = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val numberField = findViewById<EditText>(R.id.numberField)
+        numberField = findViewById(R.id.numberField)
         val teluguField = findViewById<EditText>(R.id.teluguField)
         val hindiField = findViewById<EditText>(R.id.hindiField)
         val englishField = findViewById<EditText>(R.id.englishField)
 
-        numberField.setText(readNumberFromClipboard())
         teluguField.setText(getString(R.string.message_telugu))
         hindiField.setText(getString(R.string.message_hindi))
         englishField.setText(getString(R.string.message_english))
@@ -55,7 +57,26 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.closeButton).setOnClickListener { finish() }
     }
 
-    /** Reads the current clipboard text and strips it down to a phone-number-looking string. */
+    /**
+     * Since Android 10, an app can only read the clipboard once its window has
+     * actually gained focus - reading it in onCreate()/onResume() can be a moment
+     * too early and silently return nothing. onWindowFocusChanged(true) is the
+     * reliable point to do it.
+     */
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus && !clipboardChecked) {
+            clipboardChecked = true
+            numberField.setText(readNumberFromClipboard())
+        }
+    }
+
+    /**
+     * Reads the current clipboard text and normalizes it into a phone number:
+     * strips everything but digits (and a leading "+"), and - for numbers with
+     * no "+" that start with a leading 0 (e.g. "063024 79054") - drops that
+     * leading 0 and prefixes "91" instead (e.g. "916302479054").
+     */
     private fun readNumberFromClipboard(): String {
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         if (!clipboard.hasPrimaryClip()) return ""
@@ -64,7 +85,11 @@ class MainActivity : AppCompatActivity() {
         val raw = clip.getItemAt(0).coerceToText(this).toString().trim()
         val hasPlus = raw.startsWith("+")
         val digits = raw.filter { it.isDigit() }
-        return if (hasPlus) "+$digits" else digits
+        return when {
+            hasPlus -> "+$digits"
+            digits.startsWith("0") -> "91${digits.removePrefix("0")}"
+            else -> digits
+        }
     }
 
     /** Fires the WhatsApp send intent, then the SMS compose intent, one after the other. */
