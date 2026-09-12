@@ -71,3 +71,5 @@ _The error happens because while ubuntu-latest has parts of the Android SDK prei
 To fix this, you can use a community-maintained GitHub Action called android-actions/setup-android[2]. It automatically locates the preinstalled SDK, configures the environmental variables (ANDROID_HOME, ANDROID_SDK_ROOT), adds tools like sdkmanager to your PATH, and installs any required packages[2]._
 
 And this resulted in the working app.
+
+**Note on usage** - WhatsApp comes up first. If sent via WhatsApp, we can go to the default SMS messaging app and delete the draft which would have been created there. Or send the draft.
