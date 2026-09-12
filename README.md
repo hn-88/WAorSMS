@@ -4,6 +4,8 @@ A tiny one-screen Android app you pin to your home screen. Tap it after
 copying a phone number, pick a language button, and it sends that message
 via WhatsApp **and** SMS, one after the other, in a single tap.
 
+Note on usage - WhatsApp comes up first. If sent via WhatsApp, we can go to the default SMS messaging app and delete the draft which would have been created there. Or send the draft.
+
 ## What changed from v1
 
 - Three send buttons instead of two: **Send Telugu**, **Send Hindi**,
