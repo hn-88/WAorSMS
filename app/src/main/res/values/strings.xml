@@ -4,9 +4,9 @@
 
     <!-- Edit these three manually for your own wording. Each is sent via
          WhatsApp and then SMS, one after the other, when its button is tapped. -->
-    <string name="message_telugu">నమస్కారం, ఇది మీ విషయమై ఒక సందేశం. దయచేసి అందుబాటులో ఉన్నప్పుడు తెలియజేయండి.</string>
-    <string name="message_hindi">नमस्ते, यह आपके विषय में एक संदेश है। कृपया सुविधाजनक समय पर बताएं।</string>
-    <string name="message_english">Hi, this is regarding our recent conversation. Please let me know a good time to connect.</string>
+    <string name="message_telugu">నక్షత్రశాల - https://www.saispace.in/faq-te.html \n https://www.saispace.in/</string>
+    <string name="message_hindi"> तारामंडल - https://www.saispace.in/faq-hi.html \n https://www.saispace.in/</string>
+    <string name="message_english">Planetarium FAQ - \n https://www.saispace.in/faq-en.html \n https://www.saispace.in/ has a preview</string>
 
     <string name="hint_telugu">Telugu message</string>
     <string name="hint_hindi">Hindi message</string>
